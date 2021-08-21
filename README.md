@@ -1,3 +1,3 @@
 # Algorithm
 
-chap 3 & 11 : Greedy
+- chap 3 & 11 : Greedy
