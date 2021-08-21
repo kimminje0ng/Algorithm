@@ -1,2 +1,3 @@
 # Algorithm
-민정 알고리즘
+
+chap 3 & 11 : Greedy
