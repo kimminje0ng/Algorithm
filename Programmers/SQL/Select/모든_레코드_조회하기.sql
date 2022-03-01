@@ -1,0 +1,12 @@
+-- ORDER BY : 정렬
+-- ASC : 오름차순 (default) -> 생략 가능
+
+SELECT *
+FROM ANIMAL_INS
+ORDER BY ANIMAL_ID ASC;
+
+
+-- 생략한 version
+SELECT *
+FROM ANIMAL_INS
+ORDER BY ANIMAL_ID;
