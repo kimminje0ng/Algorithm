@@ -1,44 +1,44 @@
 # https://www.acmicpc.net/problem/18405
 
+from collections import deque
+
 n, k = map(int, input().split())
 
-info = []
+info = []   # map 정보
+virus = []  # virus 정보
+
+# map 정보 입력
 for i in range(n):
     info.append(list(map(int, input().split())))
-print(info)
-
-virus = []
-for i in range(n):
     for j in range(n):
         if info[i][j] != 0:
-            virus.append([info[i][j], 0, i, j])
+            virus.append([info[i][j], 0, i, j]) # virus종류, 시간, x, y
+#print(info)
+#print(virus)
 
-s, x, y = map(int, input().split())
+# virus는 낮은 것부터 전염됨
+virus.sort() 
+q = deque(virus)
 
-def move_virus(virus_num, info):
-    new_info = [[0]*n for _ in range(n)]
+# result 조건 입력
+target_s, target_x, target_y = map(int, input().split())
 
-    for i in range(n):
-        for j in range(n):
-            if info[i][j] == virus_num:
-                new_info[i][j] = virus_num
-                if i-1 >= 0 and info[i-1][j] == 0:  # 상
-                    new_info[i-1][j] = virus_num
-                if i+1 < n and info[i+1][j] == 0: # 하
-                    new_info[i+1][j] = virus_num
-                if j-1 >= 0 and info[i][j-1] == 0:# 좌
-                    new_info[i][j-1] = virus_num
-                if j+1 < n and info[i][j+1] == 0: # 우
-                    new_info[i][j+1] = virus_num
-    return new_info
+# 상, 하, 좌, 우
+dx = [0, 0, -1, 1]
+dy = [-1, 1, 0, 0]
 
-time = 0
-while(time <= s):
-    for virus_num in range(1,k):
-        # 이렇게 해보니까 바로 info에 새로운 virus가 업데이트돼서 문제 발생함.
-        info = move_virus(virus_num, info)
-        print(info)
-    time += 1
+while q:
+    virus_type, s, x, y = q.popleft()
+    if s == target_s:
+        break
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
+        if nx >= 0 and nx < n and ny >= 0 and ny < n:
+            if info[nx][ny] == 0:
+                info[nx][ny] = virus_type
+                q.append([virus_type, s+1, nx, ny])
+    #print(info)
 
-
-print(info[x-1][y-1])
+# result 출력(좌표 0부터 시작)
+print(info[target_x-1][target_y-1])
