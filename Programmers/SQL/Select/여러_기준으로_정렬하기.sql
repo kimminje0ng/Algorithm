@@ -1,6 +1,0 @@
--- ORDER BY에서는 왼쪽이 우선순위 높음.
--- 정렬 순서 바꾸고 싶다면 각각에 옵션(ASC, DESC) 넣기
-
-SELECT ANIMAL_ID, NAME, DATETIME
-FROM ANIMAL_INS 
-ORDER BY NAME ASC, DATETIME DESC;
